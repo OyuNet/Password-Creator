@@ -11,7 +11,7 @@ answer = lower_case + upper_case + num + symbol
 
 def bulkpassword():
     password = "".join(random.sample(answer, length))
-    sifreler = open('C:/Users/OyuNet/Desktop/Şifreleyici/Pyhton Kodlarım/Sifreler.txt', 'a')
+    sifreler = open('C:/Users/OyuNet/Desktop/Şifreleyici/Pyhton Kodlarım/Sifreler.txt', 'a')  # Buraya kendi istediğiniz metin dosyasının konumunu girin.
     sifreler.write(password+'\n')
     sifreler.close  
 
