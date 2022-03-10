@@ -1,5 +1,5 @@
 # Password-Creator
-Simple password creator. Includes bulk crete.
+Simple password creator written in python. Includes bulk crete.
 
 
 # Yapılacaklar Listesi
