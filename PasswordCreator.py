@@ -20,7 +20,7 @@ length = int(input("Şifreniz kaç haneli olsun: "))
 def bulkpassword():
     password = "".join(random.sample(answer, length))
     sifreler = open('C:/Users/OyuNet/Desktop/Şifreleyici/Pyhton Kodlarım/Sifreler.txt', 'a')
-    sifreler.write(" "+password)
+    sifreler.write(password+'\n')
     sifreler.close
 
 if MainSelection == str(1):
