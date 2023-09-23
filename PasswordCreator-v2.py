@@ -1,5 +1,6 @@
 import random
 from questionary import select
+import os.path
 
 lower_case = "abcdefghijklmnopqrstuvwxyz"
 upper_case = "ABCDEFGHIJKLMONPQRSTUVWXYZ"
@@ -9,11 +10,18 @@ symbol = "[]{}#()*;._-"
 
 answer = lower_case + upper_case + num + symbol
 
+def checkFile():
+    if (os.path.exists("./sifreler.txt")):
+        print("sifreler.txt found.")
+    else:
+        open("./sifreler.txt", "x")
+        print("./sifreler.txt can't found. Created...")
+
 def bulkpassword():
     password = "".join(random.sample(answer, length))
-    sifreler = open('C:/Users/OyuNet/Desktop/Şifreleyici/Pyhton Kodlarım/Sifreler.txt', 'a')  # Buraya kendi istediğiniz metin dosyasının konumunu girin.
+    sifreler = open('./sifreler.txt', 'a')  # Buraya kendi istediğiniz metin dosyasının konumunu girin.
     sifreler.write(password+'\n')
-    sifreler.close  
+    sifreler.close
 
 while True:
     MainSelection = select(
@@ -32,6 +40,7 @@ while True:
     elif "Çoklu Şifre Oluştur" in MainSelection:
         length = int(input("Şifreniz kaç haneli olsun: "))
         amount = int(input("Kaç tane şifre oluşturmak istiyorsunuz: "))
+        checkFile()
         while True:
             if (amount > 0):
                 bulkpassword()
