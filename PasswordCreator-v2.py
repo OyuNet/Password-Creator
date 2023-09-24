@@ -1,6 +1,15 @@
 import random
 from questionary import select
 import os.path
+import os
+from dotenv import load_dotenv, dotenv_values
+
+load_dotenv()
+
+config = dotenv_values(".env")
+
+localLang = config.get("LANG")
+path = config.get("BULKPATH")
 
 lower_case = "abcdefghijklmnopqrstuvwxyz"
 upper_case = "ABCDEFGHIJKLMONPQRSTUVWXYZ"
@@ -10,18 +19,23 @@ symbol = "[]{}#()*;._-"
 
 answer = lower_case + upper_case + num + symbol
 
+
+
 def checkFile():
-    if (os.path.exists("./sifreler.txt")):
-        print("sifreler.txt found.")
+    if (os.path.exists(path)):
+        print("Bulk file found.")
     else:
-        open("./sifreler.txt", "x")
-        print("./sifreler.txt can't found. Created...")
+        open(path, "x")
+        print(path + " can't found. Created...")
 
 def bulkpassword():
     password = "".join(random.sample(answer, length))
-    sifreler = open('./sifreler.txt', 'a')  # Buraya kendi istediğiniz metin dosyasının konumunu girin.
+    sifreler = open(path, 'a')  
     sifreler.write(password+'\n')
     sifreler.close
+    
+def setPath(newPath):
+    os.system("dotenv set BULKPATH " + newPath)
 
 while True:
     MainSelection = select(
@@ -75,10 +89,12 @@ while True:
                         break
                 
             elif "Toplu Kayıt Dosyası" in SettingsSelection:
-                fileInput = str(input("Yeni dosya adını giriniz: "))
+                fileInput = str(input("Yeni dosya adını giriniz (.txt olmadan): "))
+                newpath = "./" + fileInput + ".txt"
                 print("Yeni dosya adınız: " + fileInput + ".txt")
                 
             elif "Geri" in SettingsSelection:
                 break        
     elif "Çıkış" in MainSelection:
-        break            
+        os.system("clear")
+        break
