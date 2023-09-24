@@ -3,8 +3,11 @@ from questionary import select
 import os.path
 import os
 from dotenv import load_dotenv, dotenv_values
+import sys
 
 load_dotenv()
+
+isWin = sys.platform.startswith("win")
 
 config = dotenv_values(".env")
 
@@ -13,13 +16,10 @@ path = config.get("BULKPATH")
 
 lower_case = "abcdefghijklmnopqrstuvwxyz"
 upper_case = "ABCDEFGHIJKLMONPQRSTUVWXYZ"
-
 num = "1234567890"
 symbol = "[]{}#()*;._-"
 
 answer = lower_case + upper_case + num + symbol
-
-
 
 def checkFile():
     if (os.path.exists(path)):
@@ -36,6 +36,9 @@ def bulkpassword():
     
 def setPath(newPath):
     os.system("dotenv set BULKPATH " + newPath)
+    
+def setLang(newLang):
+    os.system("dotenv set LANG " + newpath)    
 
 while True:
     MainSelection = select(
@@ -79,11 +82,15 @@ while True:
                                 'İngilizce',
                                 'Geri']
                     ).ask()
+                    
+                    # Lang selection için bir şeyler yazılacak.
                     if "Türkçe" in LangSelection:
                         print("Diliniz Türkçe olarak ayarlandı.")
+                        setLang("TR")
                         break
                     elif "İngilizce" in LangSelection:
                         print("Diliniz İngilizce olarak ayarlandı.")
+                        setLang("EN")
                         break
                     elif "Geri" in LangSelection:
                         break
@@ -96,5 +103,9 @@ while True:
             elif "Geri" in SettingsSelection:
                 break        
     elif "Çıkış" in MainSelection:
-        os.system("clear")
-        break
+        if (isWin):
+            os.system("cls")
+            break
+        else:
+            os.system("clear")    
+            break
