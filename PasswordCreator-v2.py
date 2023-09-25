@@ -30,7 +30,7 @@ def checkFile():
 
 def bulkpassword():
     password = "".join(random.sample(answer, length))
-    sifreler = open(path, 'a')  
+    sifreler = open(path, 'a')
     sifreler.write(password+'\n')
     sifreler.close
     
@@ -38,7 +38,7 @@ def setPath(newPath):
     os.system("dotenv set BULKPATH " + newPath)
     
 def setLang(newLang):
-    os.system("dotenv set LANG " + newpath)    
+    os.system("dotenv set LANG " + newLang)    
 
 while True:
     MainSelection = select(
@@ -98,6 +98,7 @@ while True:
             elif "Toplu Kayıt Dosyası" in SettingsSelection:
                 fileInput = str(input("Yeni dosya adını giriniz (.txt olmadan): "))
                 newpath = "./" + fileInput + ".txt"
+                setPath(newpath)
                 print("Yeni dosya adınız: " + fileInput + ".txt")
                 
             elif "Geri" in SettingsSelection:
